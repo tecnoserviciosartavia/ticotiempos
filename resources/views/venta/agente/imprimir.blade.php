@@ -78,7 +78,7 @@ img {
     	<a href="{{ route('venta_sorteo.create')}}" class="oculto-impresion" >Atras</a>
         <div class="ticket">
             <p class="centrado">
-                <img alt="Tiempos - Darwins" class="w-6" src="{{ Auth::user()->photo_url }}" style="
+                <img alt="TicoTiempos" class="w-6" src="{{ Auth::user()->photo_url }}" style="
     width: 80px;
     height: 80px;
     border-radius: 50%;

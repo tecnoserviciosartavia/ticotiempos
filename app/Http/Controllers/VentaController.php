@@ -1022,7 +1022,7 @@ class VentaController extends Controller
         $html = '';
         $html .= '<div class="ticket" style="margin-left:200px;">
                     <p class="centrado">
-                    <img alt="Tiempos - Darwins" class="w-6" src="'.  Auth::user()->photo_url .'" style="width: 80px;height: 80px;border-radius: 50%;margin-left: 50px;"><br>                        <b>'. $venta[0]->name_banca .'</b>
+                    <img alt="TicoTiempos" class="w-6" src="'.  Auth::user()->photo_url .'" style="width: 80px;height: 80px;border-radius: 50%;margin-left: 50px;"><br>                        <b>'. $venta[0]->name_banca .'</b>
                         <br><b>Sorteo:</b>'. $venta_cabecera[0]->nombre .'
                         <br><b>Fecha:</b> '.$venta_cabecera[0]->fecha .'
                         <br><b>Hora:</b>'. $venta_cabecera[0]->hora .'

@@ -167,7 +167,7 @@
                                 <div class="intro-x">
                                     <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
                                         <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                            <img alt="Logo Darwins" src="{{ asset('dist/images/logos/LOGODkk.png') }}">
+                                            <img alt="Logo TicoTiempos" src="{{ asset('dist/images/logos/LOGODkk.png') }}">
                                         </div>
                                         <div class="ml-4 mr-auto">
                                             <div class="font-medium">{{ $operaciones->concepto }} - {{ $operaciones->usuarios->name }}</div>
