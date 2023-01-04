@@ -24,10 +24,10 @@
                                     <div class="h-40 relative image-fit cursor-pointer zoom-in mx-auto">
                                         @if (is_null($sorteo->logo))
 
-                                            <img class="rounded-md" alt="Tiempos Darwins" src="{{ asset('dist/images/logos/LOGODkk.png') }}" id='logo_sorteo_edit'>
+                                            <img class="rounded-md" alt="TicoTiempos" src="{{ asset('dist/images/logos/LOGODkk.png') }}" id='logo_sorteo_edit'>
                                         @else
 
-                                            <img class="rounded-md" alt="Tiempos Darwins" src="{{ asset('dist/images/sorteos/'.$sorteo->logo) }}" id='logo_sorteo_edit'>
+                                            <img class="rounded-md" alt="TicoTiempos" src="{{ asset('dist/images/sorteos/'.$sorteo->logo) }}" id='logo_sorteo_edit'>
                                         @endif
                                     </div>
                                     <div class="mx-auto cursor-pointer relative mt-5">

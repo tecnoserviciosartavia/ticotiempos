@@ -1,7 +1,7 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-    <title>Tiempos Darwins - Venta Sorteos</title>
+    <title>TicoTiempos - Venta Sorteos</title>
 @endsection
 
 @section('subcontent')
@@ -43,9 +43,9 @@
                             <div class="flex-none relative block before:block before:w-full before:pt-[100%]">
                                 <div class="absolute top-0 left-0 w-full h-full image-fit">
                                     @if (is_null($venta_cabecera[0]->logo))
-                                        <img class="rounded-full" alt="Tiempos Darwins" src="{{ asset('dist/images/logos/LOGODkk.png') }}">
+                                        <img class="rounded-full" alt="TicoTiempos" src="{{ asset('dist/images/logos/LOGODkk.png') }}">
                                     @else
-                                        <img class="rounded-full" alt="Tiempos Darwins" src="{{ asset('dist/images/sorteos/'.$venta_cabecera[0]->logo) }}">
+                                        <img class="rounded-full" alt="TicoTiempos" src="{{ asset('dist/images/sorteos/'.$venta_cabecera[0]->logo) }}">
 
                                     @endif
                                 </div>

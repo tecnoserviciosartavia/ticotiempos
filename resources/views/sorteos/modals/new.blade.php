@@ -20,7 +20,7 @@
                     <div class="w-52 mx-auto xl:mr- xl:ml-6">
                         <div class="border-2 border-dashed shadow-sm border-slate-200/60 dark:border-darkmode-400 rounded-md p-5">
                             <div class="h-40 relative image-fit cursor-pointer zoom-in mx-auto">
-                                <img class="rounded-md" alt="Tiempos Darwins" src="{{ asset('dist/images/logos/LOGODkk.png') }}">
+                                <img class="rounded-md" alt="TicoTiempos" src="{{ asset('dist/images/logos/LOGODkk.png') }}">
                             </div>
                             <div class="mx-auto cursor-pointer relative mt-5">
                                 <button type="button" class="btn btn-primary w-full"><i data-lucide="image" class="w-4 h-4 mr-2"></i>Cargar Logo</button>
