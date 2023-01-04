@@ -1,7 +1,7 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-    <title>Tiempos Darwins - Resultados</title>
+    <title>TicoTiempos - Resultados</title>
     <style>
         .dot {
             height: 25px;

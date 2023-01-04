@@ -4,7 +4,7 @@
     <head>
         <link rel="stylesheet" href="{{ asset('dist') }}/farbtastic.css" type="text/css" />
     </head>
-    <title>Tiempos Darwins - Configuracion de Resultados</title>
+    <title>TicoTiempos - Configuracion de Resultados</title>
 @endsection
 
 @section('subcontent')

@@ -13,7 +13,7 @@
             <a href="" class="-intro-x hidden md:flex">
                 <img alt="Midone - HTML Admin Template" class="w-6" src="{{ asset('dist/images/logos/logos-new.png') }}">
                 <span class="text-white text-lg ml-3">
-                Tiempos Darwins
+                TicoTiempos
                 </span>
             </a>
             <!-- END: Logo -->
@@ -151,7 +151,7 @@
             <a href="" class="-intro-x hidden md:flex">
                 <img alt="Midone - HTML Admin Template" class="w-6" src="{{ asset('dist/images/logos/logos-new.png') }}">
                 <span class="text-white text-lg ml-3">
-                    Tiempos Darwins
+                    TicoTiempos
                 </span>
             </a>
             <!-- END: Logo -->

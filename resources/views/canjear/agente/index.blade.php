@@ -1,7 +1,7 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-    <title>Tiempos Darwins - Canjear Sorteo</title>
+    <title>TicoTiempos - Canjear Sorteo</title>
 @endsection
 
 @section('subcontent')
@@ -75,7 +75,7 @@
                                 <td>{{ $ticket['monto'] }}</td>
                                 <td class="text-center">
                                     @if ($ticket['es_ganador'] > 0)
-                                     <img src="{{ url('dist/images/sorteo-ganador-min.png')}}" alt="Tiempos Darwins" style="width: 120px;" class="text-center">
+                                     <img src="{{ url('dist/images/sorteo-ganador-min.png')}}" alt="TicoTiempos" style="width: 120px;" class="text-center">
                                     @else
                                         Mas suerte la proxima Vez!
                                     @endif

@@ -1,7 +1,7 @@
 @extends('../layout/' . $layout)
 
 @section('head')
-    <title>Tiempos Darwins - Inicio de Sesion</title>
+    <title>TicoTiempos - Inicio de Sesion</title>
 @endsection
 
 @section('content')
@@ -11,13 +11,13 @@
             <!-- BEGIN: Login Info -->
             <div class="hidden xl:flex flex-col min-h-screen">
                 <a href="" class="-intro-x flex items-center pt-5">
-                    <img alt="Tiempos Darwins" class="w-6" src="{{ asset('dist/images/logos/logos-new.png') }}">
+                    <img alt="TicoTiempos" class="w-6" src="{{ asset('dist/images/logos/logos-new.png') }}">
                     <span class="text-white text-lg ml-3">
-                        Tiempos Darwins
+                        TicoTiempos
                     </span>
                 </a>
                 <div class="my-auto">
-                    <img alt="Tiempos Darwins" class="-intro-x w-1/2 -mt-16" src="{{ asset('dist/images/logos/logos-new.png') }}">
+                    <img alt="TicoTiempos" class="-intro-x w-1/2 -mt-16" src="{{ asset('dist/images/logos/logos-new.png') }}">
                     <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">Grupo Darwins <br> Sociedad Anonima.</div>
                     <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">Para obtener una cuenta puedes comunicarte a travez del siguiente correo con el administrador del sitio tiemposdarwins@gmail.com</div>
                 </div>

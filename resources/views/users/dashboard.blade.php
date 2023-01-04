@@ -126,7 +126,7 @@
                                         <td class="w-40">
                                             <div class="flex">
                                                 <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                                    <img alt="Tiempos Darwins" class="tooltip rounded-full" src="{{ $jugadas->sorteos->primera_foto }}" title="{{ $jugadas->sorteos->nombre}}">
+                                                    <img alt="TicoTiempos" class="tooltip rounded-full" src="{{ $jugadas->sorteos->primera_foto }}" title="{{ $jugadas->sorteos->nombre}}">
                                                 </div>{{ $jugadas->sorteos->nombre}}
                                             </div>
 

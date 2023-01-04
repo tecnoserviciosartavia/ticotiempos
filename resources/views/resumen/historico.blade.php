@@ -1,7 +1,7 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-    <title>Tiempos Darwins - Historico de Jugadas</title>
+    <title>TicoTiempos - Historico de Jugadas</title>
 @endsection
 
 @section('subcontent')

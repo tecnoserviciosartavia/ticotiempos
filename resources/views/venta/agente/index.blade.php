@@ -1,7 +1,7 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-    <title>Tiempos Darwins - Venta Sorteos</title>
+    <title>TicoTiempos - Venta Sorteos</title>
 @endsection
 
 @section('subcontent')
@@ -38,7 +38,7 @@
                         <div class="box rounded-md p-3 relative zoom-in">
                             <div class="flex-none relative block before:block before:w-full before:pt-[100%]">
                                 <div class="absolute top-0 left-0 w-full h-full image-fit">
-                                    <img class="rounded-full" alt="Tiempos Darwins" src="{{ $venta->sorteos->primera_foto }}">
+                                    <img class="rounded-full" alt="TicoTiempos" src="{{ $venta->sorteos->primera_foto }}">
                                 </div>
                             </div>
                             <div class="block font-medium text-center truncate mt-3">{{ $venta->nombre }}</div>

@@ -140,7 +140,7 @@ img {
                 @foreach ($bolitas as $bolita)
                     <br><b  style="background-color: <?php echo $bolita->color; ?>;">{{ $bolita->descripcion }}</b> - <b>Paga: {{ $bolita->paga_resultado}}</b>
                 @endforeach
-                <br><b>SISTEMAS TIEMPOS DARWINS<br></b>
+                <br><b>SISTEMAS TicoTiempos<br></b>
                 Mucha Suerte en el sorteo<br>
                 <b>Nota:</b> tienes 7 días hábiles para canjear su premio.<br>
                 @if ($impresion > 0)

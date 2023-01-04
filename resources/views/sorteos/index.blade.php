@@ -1,7 +1,7 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-    <title>Tiempos Darwins - Sorteos</title>
+    <title>TicoTiempos - Sorteos</title>
 @endsection
 
 @section('subcontent')
@@ -35,7 +35,7 @@
                         <tr>
                             <td class="text-center">
                                 <div class="w-10 h-10 image-fit zoom-in text-center">
-                                    <img class="tooltip rounded-full text-center" alt="Tiempos Darwins" src="{{ $sorteo->primera_foto }}">
+                                    <img class="tooltip rounded-full text-center" alt="TicoTiempos" src="{{ $sorteo->primera_foto }}">
                                 </div>
                             </td>
                             <td>{{ $sorteo->id }}</td>
