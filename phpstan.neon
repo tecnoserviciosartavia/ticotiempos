@@ -1,0 +1,22 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    paths:
+        - app
+        - config
+        - database
+        - routes
+
+    # The level 8 is the highest level
+    level: 2
+
+    ignoreErrors:
+    - "#^Call to an undefined method Illuminate\\\\Database\\\\Schema\\\\ColumnDefinition\\:\\:comments\\(\\)\\.$#"
+    - "#^Call to an undefined method Illuminate\\\\Database\\\\Schema\\\\ColumnDefinition\\:\\:references\\(\\)\\.$#"
+    - "#^Call to an undefined method Illuminate\\\\Support\\\\Fluent\\:\\:cascadeOnDelete\\(\\)\\.$#"
+
+    #excludePaths:
+    #    - ./*/*/FileToBeExcluded.php
+
+    checkMissingIterableValueType: false
