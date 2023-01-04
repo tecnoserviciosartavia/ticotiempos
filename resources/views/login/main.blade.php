@@ -18,8 +18,8 @@
                 </a>
                 <div class="my-auto">
                     <img alt="TicoTiempos" class="-intro-x w-1/2 -mt-16" src="{{ asset('dist/images/logos/logos-new.png') }}">
-                    <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">Grupo Darwins <br> Sociedad Anonima.</div>
-                    <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">Para obtener una cuenta puedes comunicarte a travez del siguiente correo con el administrador del sitio tiemposdarwins@gmail.com</div>
+                    <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">TicoTiempos</div>
+                    <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">Para obtener una cuenta puedes comunicarte a travez del siguiente correo <br> con el administrador del sitio tiemposdarwins@gmail.com</div>
                 </div>
             </div>
             <!-- END: Login Info -->
