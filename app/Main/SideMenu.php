@@ -15,7 +15,7 @@ class SideMenu
                     ],
                     'title' => 'Principal'
                 ],
-                'menu-layout' => [
+                /*'menu-layout' => [
                     'icon' => 'box',
                     'title' => 'Menu Layout',
                     'sub_menu' => [
@@ -44,7 +44,7 @@ class SideMenu
                             'title' => 'Top Menu'
                         ]
                     ]
-                ],
+                ],*/
                 'e-commerce' => [
                     'icon' => 'shopping-bag',
                     'title' => 'Venta',
