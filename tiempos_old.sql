@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 24-08-2023 a las 05:17:31
--- Versión del servidor: 10.7.8-MariaDB-1:10.7.8+maria~ubu2004
--- Versión de PHP: 8.2.9
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 30-01-2023 a las 00:05:10
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `tiempos`
+-- Base de datos: `test`
 --
 
 -- --------------------------------------------------------
@@ -251,10 +250,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `photo`, `gender`, `active`, `es_administrador`, `saldo_actual`, `block_user`, `cod_unico`, `deleted_at`, `remember_token`, `created_at`, `updated_at`) VALUES
-(14, 'aserri1', 'aserri1@gmail.com', NULL, '$2y$10$o/CHDADtqN0/1zKrLPQCO.zY2yZqrxOQNCA/6tByCUfYiSokeUQLO', '63ae5823876da_IMG-20221015-WA0000.jpg', 'female', 0, 0, 0.00000, 0, 'Nzg3OA==', NULL, NULL, '2022-08-30 20:22:49', '2023-08-24 04:32:46'),
-(15, 'aserri2', 'aserri2@gmail.com', NULL, '$2y$10$Sc9nQ9PKJoYnN0lyztN1rutHp17.pGDa6eRkWCEaHoplaQdW6g/J.', '631d15be9bcdd_WhatsApp Image 2022-08-15 at 11.59.23 AM.jpeg', 'male', 0, 0, 0.00000, 0, 'MTIzNDU2', NULL, NULL, '2022-08-30 20:24:01', '2023-08-24 04:32:50'),
-(16, 'Administrador', 'admin@ticotiempos.com', NULL, '$2y$10$f89PnL4pSH54cKhgEAN3juAEjvb6s870LP0pO2WE9iNiORnmSFn0u', '64e6dd9f07b78_LOGODkk.png', 'male', 1, 1, 0.00000, 0, 'MTIzNDU2', NULL, NULL, '2022-09-05 16:12:41', '2023-08-24 04:33:35'),
-(19, 'puesto', 'puesto@ticotiempos.com', NULL, '$2y$10$6.dunc2jxyne9ZmtF344T.6c6t59J1YmmjfjTXt7PXCanVS.D2aZW', NULL, 'male', 1, 0, 0.00000, 0, 'MTIzNDU2', NULL, NULL, '2023-08-24 04:44:04', '2023-08-24 04:44:04');
+(14, 'aserri1', 'aserri1@gmail.com', NULL, '$2y$10$o/CHDADtqN0/1zKrLPQCO.zY2yZqrxOQNCA/6tByCUfYiSokeUQLO', '63ae5823876da_IMG-20221015-WA0000.jpg', 'female', 1, 0, 0.00000, 0, 'Nzg3OA==', NULL, NULL, '2022-08-30 20:22:49', '2022-12-30 16:26:34'),
+(15, 'aserri2', 'aserri2@gmail.com', NULL, '$2y$10$Sc9nQ9PKJoYnN0lyztN1rutHp17.pGDa6eRkWCEaHoplaQdW6g/J.', '631d15be9bcdd_WhatsApp Image 2022-08-15 at 11.59.23 AM.jpeg', 'male', 1, 0, 0.00000, 0, 'MTIzNDU2', NULL, NULL, '2022-08-30 20:24:01', '2022-09-10 17:35:28'),
+(16, 'Winston', 'winston@gmail.com', NULL, '$2y$10$f89PnL4pSH54cKhgEAN3juAEjvb6s870LP0pO2WE9iNiORnmSFn0u', '63ae57973b7b6_IMG-20220905-WA0000.jpg', 'male', 1, 1, 0.00000, 0, 'MTIzNDU2', NULL, NULL, '2022-09-05 16:12:41', '2022-10-01 22:33:15');
 
 -- --------------------------------------------------------
 
@@ -274,16 +272,6 @@ CREATE TABLE `user_balances` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `user_balances`
---
-
-INSERT INTO `user_balances` (`id`, `users_id`, `saldo_anterior`, `premios_del_dia`, `ventas_dia`, `comisiones_dia`, `saldo_final`, `fecha_diaria`, `created_at`, `updated_at`) VALUES
-(1, 14, 0.000, 0.000, 0.000, 0.000, 0.000, '2023-08-23', '2023-08-24 04:24:57', '2023-08-24 04:24:57'),
-(2, 15, 0.000, 0.000, 0.000, 0.000, 0.000, '2023-08-23', '2023-08-24 04:24:57', '2023-08-24 04:24:57'),
-(3, 16, 0.000, 0.000, 0.000, 0.000, 0.000, '2023-08-23', '2023-08-24 04:24:57', '2023-08-24 04:24:57'),
-(4, 19, 0.000, 0.000, 0.000, 0.000, 0.000, '2023-08-23', '2023-08-24 04:44:04', '2023-08-24 04:44:04');
 
 -- --------------------------------------------------------
 
@@ -498,13 +486,13 @@ ALTER TABLE `transacciones`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `user_balances`
 --
 ALTER TABLE `user_balances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `venta_cabecera`
