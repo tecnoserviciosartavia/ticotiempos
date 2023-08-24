@@ -57,14 +57,14 @@ class SideMenu
                             ],
                             'title' => 'Sorteos'
                         ],
-                        'add-product' => [
+                        /*'add-product' => [
                             'icon' => '',
                             'route_name' => 'venta_sorteo.create',
                             'params' => [
                                 'layout' => 'side-menu'
                             ],
                             'title' => 'Parlay',
-                        ],
+                        ],*/
                         'reviews' => [
                             'icon' => '',
                             'route_name' => 'venta_sorteo.create',
