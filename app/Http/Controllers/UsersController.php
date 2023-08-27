@@ -205,9 +205,9 @@ class UsersController extends Controller
     {
         if (Auth::user()->es_administrador > 0) {
             if (Auth::user()->gender == 'female') {
-                return redirect()->route('dashboard.admin')->withSuccess(__('Bienvenido Doña '.Auth::user()->name.'!.'));
+                return redirect()->route('dashboard.admin')->withSuccess(__('Bienvenido'.Auth::user()->name.'!.'));
             } else {
-                return redirect()->route('dashboard.admin')->withSuccess(__('Bienvenido Don '.Auth::user()->name.'!.'));
+                return redirect()->route('dashboard.admin')->withSuccess(__('Bienvenido'.Auth::user()->name.'!.'));
             }
 
         } else {
