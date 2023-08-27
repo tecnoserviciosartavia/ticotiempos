@@ -3,4 +3,4 @@
     <div class="mr-4 text-slate-600 dark:text-slate-200">Dark Mode</div>
     <div class="dark-mode-switcher__toggle {{ $dark_mode ? 'dark-mode-switcher__toggle--active' : '' }} border"></div>
 </div>
- <!--END: Dark Mode Switcher-->
+
