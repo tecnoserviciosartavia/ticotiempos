@@ -7,7 +7,7 @@
         @else
             @yield('admin_content')
         @endif
-        <!-- @include('../layout/components/dark-mode-switcher')
+        @include('../layout/components/dark-mode-switcher')
          @include('../layout/components/main-color-switcher')-->
 
         <!-- BEGIN: JS Assets-->
