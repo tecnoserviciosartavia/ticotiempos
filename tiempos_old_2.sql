@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1deb5ubuntu1
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 27-08-2023 a las 21:44:13
--- Versión del servidor: 10.6.12-MariaDB-0ubuntu0.22.04.1
--- Versión de PHP: 8.1.22
+-- Tiempo de generación: 24-08-2023 a las 05:17:31
+-- Versión del servidor: 10.7.8-MariaDB-1:10.7.8+maria~ubu2004
+-- Versión de PHP: 8.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -250,10 +251,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `photo`, `gender`, `active`, `es_administrador`, `saldo_actual`, `block_user`, `cod_unico`, `deleted_at`, `remember_token`, `created_at`, `updated_at`) VALUES
-(14, 'puesto1', 'puesto1@ticotiempos.com', NULL, '$2y$10$d4wDwhzzJqvFpm.Rts4c4u5qGJ1VEXGyztSB8BqSYLA9/CZlbfdZe', '64ec07e484299_LOGODkk.png', 'female', 1, 0, 0.00000, 0, 'Nzg3OA==', NULL, NULL, '2022-08-30 20:22:49', '2023-08-28 02:42:01'),
-(15, 'puesto2', 'puesto2@ticotiempos.com', NULL, '$2y$10$N9qb4laG4pL3Yvj0sAGl1.ix9o7lUpORz5SoaI49zQpYjSEeSOdDu', '64ec08616059e_LOGODkk.png', 'male', 1, 0, 0.00000, 0, 'MTIzNDU2', NULL, NULL, '2022-08-30 20:24:01', '2023-08-28 02:42:17'),
-(16, 'Administrador', 'admin@ticotiempos.com', NULL, '$2y$10$SGzD.v/ImDZXlFvJoDBZku9x8s7fw7NAIeTk1is2LSO.BvnqpwHiC', '64ec086f25502_LOGODkk.png', 'male', 1, 1, 0.00000, 0, 'MTIzNDU2', NULL, NULL, '2022-09-05 16:12:41', '2023-08-28 02:42:33'),
-(19, 'puesto3', 'puesto3@ticotiempos.com', NULL, '$2y$10$k5rp76ZPVqUzUYvh5cVtlOJbe8BDMdj7/EAk4dAcFs42jCZ1UBaY2', '64ec09ab3bf33_LOGODkk.png', 'male', 1, 0, 0.00000, 0, 'MTIzNDU2', NULL, NULL, '2023-08-24 04:44:04', '2023-08-28 02:43:10');
+(14, 'aserri1', 'aserri1@gmail.com', NULL, '$2y$10$o/CHDADtqN0/1zKrLPQCO.zY2yZqrxOQNCA/6tByCUfYiSokeUQLO', '63ae5823876da_IMG-20221015-WA0000.jpg', 'female', 0, 0, 0.00000, 0, 'Nzg3OA==', NULL, NULL, '2022-08-30 20:22:49', '2023-08-24 04:32:46'),
+(15, 'aserri2', 'aserri2@gmail.com', NULL, '$2y$10$Sc9nQ9PKJoYnN0lyztN1rutHp17.pGDa6eRkWCEaHoplaQdW6g/J.', '631d15be9bcdd_WhatsApp Image 2022-08-15 at 11.59.23 AM.jpeg', 'male', 0, 0, 0.00000, 0, 'MTIzNDU2', NULL, NULL, '2022-08-30 20:24:01', '2023-08-24 04:32:50'),
+(16, 'Administrador', 'admin@ticotiempos.com', NULL, '$2y$10$f89PnL4pSH54cKhgEAN3juAEjvb6s870LP0pO2WE9iNiORnmSFn0u', '64e6dd9f07b78_LOGODkk.png', 'male', 1, 1, 0.00000, 0, 'MTIzNDU2', NULL, NULL, '2022-09-05 16:12:41', '2023-08-24 04:33:35'),
+(19, 'puesto', 'puesto@ticotiempos.com', NULL, '$2y$10$6.dunc2jxyne9ZmtF344T.6c6t59J1YmmjfjTXt7PXCanVS.D2aZW', NULL, 'male', 1, 0, 0.00000, 0, 'MTIzNDU2', NULL, NULL, '2023-08-24 04:44:04', '2023-08-24 04:44:04');
 
 -- --------------------------------------------------------
 
