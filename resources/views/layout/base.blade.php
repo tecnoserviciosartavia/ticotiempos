@@ -24,7 +24,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}" />
     <!-- END: CSS Assets-->
-    <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
 </head>
 <!-- END: Head -->
