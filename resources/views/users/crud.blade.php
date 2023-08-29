@@ -40,7 +40,7 @@
                                 Género  <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Requerido</span>
                                 </label>
                                 <select name="gender" id="gender" class="tom-select w-full tomselected">
-                                    <option value="male" {{ ($users->gender == 'male' ? 'selected="selected"' : '') }}>H0mbre</option>
+                                    <option value="male" {{ ($users->gender == 'male' ? 'selected="selected"' : '') }}>Hombre</option>
                                     <option value="female" {{ ($users->gender == 'female' ? 'selected="selected"' : '') }}>Mujer</option>
                                 </select>
                             </div>
@@ -104,7 +104,7 @@
                                 Género  <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Requerido</span>
                                 </label>
                                 <select name="gender" id="gender" class="tom-select w-full tomselected">
-                                    <option value="male" selected>H0mbre</option>
+                                    <option value="male" selected>Hombre</option>
                                     <option value="female">Mujer</option>
                                 </select>
                                 @include('alerts.feedback', ['field' => 'gender'])
