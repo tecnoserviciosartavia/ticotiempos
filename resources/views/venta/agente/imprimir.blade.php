@@ -65,7 +65,7 @@ img {
             height: 25px;
             width: 25px;
             background-color: #bbb;
-            border-radius: 50%;
+            border-radius: 0%;
             display: inline-block;
         }
 
