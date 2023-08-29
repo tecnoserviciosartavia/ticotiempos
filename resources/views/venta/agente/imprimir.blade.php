@@ -79,8 +79,8 @@ img {
         <div class="ticket">
             <p class="centrado">
                 <img alt="TicoTiempos" class="w-6" src="{{ Auth::user()->photo_url }}" style="
-    width: 80px;
-    height: 80px;
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
     margin-left: 50px;
 "><br>

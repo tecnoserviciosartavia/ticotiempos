@@ -1068,7 +1068,7 @@ class VentaController extends Controller
                         foreach ($bolitas as $bolita){
                             $html .= '<br><b  style="background-color: '. $bolita->color  .';">'. $bolita->descripcion  .'</b> - <b>Paga: '. $bolita->paga_resultado.'</b>';
                         }
-                        $html .= '<br><b>Tecno Servicios Artavia<br></b>
+                        $html .= '<br><b>TicoTiempos<br></b>
                         Mucha Suerte en el sorteo<br>
                         <b>Nota:</b> tienes 7 días hábiles para canjear su premio.<br>';
                         if ($impresion > 0) {
