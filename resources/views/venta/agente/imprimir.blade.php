@@ -2,7 +2,7 @@
 <html>
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
-    
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('black') }}/img/apple-icon.png">
     <link href="{{ asset('black') }}/css/theme.css" rel="stylesheet" />
 
 	<style type="text/css">
