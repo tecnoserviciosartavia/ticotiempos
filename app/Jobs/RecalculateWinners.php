@@ -42,6 +42,45 @@ class RecalculateWinners implements ShouldQueue
     {
         //Juego en curso
         $juego = Venta_cabecera::find($this->venta_cabecera);
+        // Leer el archivo de resultados generado por Node
+        $file_path = base_path('resultados.txt');
+        if (!file_exists($file_path)) {
+            \Log::error('No se encontró el archivo de resultados: ' . $file_path);
+            return;
+        }
+        $json = file_get_contents($file_path);
+        $data = json_decode($json, true);
+        if (!$data) {
+            \Log::error('No se pudo decodificar el JSON de resultados.');
+            return;
+        }
+        // Determinar el resultado según la hora del sorteo
+        switch ($juego->sorteos->hora) {
+            case '12:55:00':
+                $numero  = $data['manana']['numero'];
+                $bolita  = $data['manana']['colorBolita'];
+                break;
+            case '16:30:00':
+                $numero  = $data['mediaTarde']['numero'];
+                $bolita  = $data['mediaTarde']['colorBolita'];
+                break;
+            case '19:30:00':
+                $numero  = $data['tarde']['numero'];
+                $bolita  = $data['tarde']['colorBolita'];
+                break;
+            default:
+                \Log::error('Hora de sorteo no reconocida: ' . $juego->sorteos->hora);
+                return;
+        }
+        $letra = substr($bolita, 0,1);
+        $consulta = Resultados_parametros::where('descripcion', '=', $letra)->first();
+        //Actualizo la informacion
+        Venta_cabecera::where('id', $this->venta_cabecera)
+        ->update([
+            'numero_ganador' => $numero,
+            'adicional_ganador' => $consulta ? $consulta->id : null,
+        ]);
+
         //Jugadas Ganadoras
         $jugadas_ganadoras = Venta_detalle::where([
             ['idventa_cabecera', '=', $this->venta_cabecera],

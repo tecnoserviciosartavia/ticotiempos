@@ -64,15 +64,19 @@ class SorteosController extends Controller
         // Nueva validacion para cuando usa Webservices mando a guardar la URL y guardo el ultimo numero de sorteo
         // para asi sumarle +3 y saber el proximo para el webservice tica
         if ($request->usa_webservice > 0) {
-
             if ($request->url_webservice == 0) {
-
                 Session::flash('message', "Selecciono Webservice debe escojer una opcion");
                 return redirect()->route('sorteos.index');
             }
-            $sorteos->url_webservice           = $request->url_webservice;
-            $sorteos->numero_sorteo_webservice = $this->buscarNumeroWebservice($request->url_webservice, $request->hora);
-
+            $sorteos->url_webservice = $request->url_webservice;
+            $numero_actual = $this->getNumeroSorteoDesdeTxt($request->hora);
+            \Log::info('Numero de sorteo desde TXT asignado:', ['numero' => $numero_actual, 'hora' => $request->hora]);
+            if ($numero_actual !== null) {
+                $sorteos->numero_sorteo_webservice = $numero_actual;
+            } else {
+                $sorteos->numero_sorteo_webservice = 0;
+                Session::flash('error', 'No se pudo obtener el número de sorteo desde el archivo resultados.txt.');
+            }
         }
         $sorteos->created_at = date('Y-m-d');
         $sorteos->updated_at = date('Y-m-d');
@@ -146,11 +150,14 @@ class SorteosController extends Controller
     public function edit($id)
     {
         $sorteo = Sorteos::find($id);
-
+        if ($sorteo && $sorteo->usa_webservice > 0) {
+            $numero_actual = $this->getNumeroSorteoDesdeTxt($sorteo->hora);
+            if ($numero_actual !== null) {
+                $sorteo->numero_sorteo_webservice = $numero_actual;
+            }
+        }
         return view('sorteos/edit', [
-            // Use the top-menu layout
-            // Pass data to view
-            'sorteo' => Sorteos::find($id),
+            'sorteo' => $sorteo,
         ]);
     }
 
@@ -189,22 +196,23 @@ class SorteosController extends Controller
             $sorteo->monto_limite_numero   = $request->monto_limite_numero;
         }
         $sorteo->usa_webservice = $request->usa_webservice;
-        // Nueva validacion para cuando usa Webservices mando a guardar la URL y guardo el ultimo numero de sorteo
-        // para asi sumarle +3 y saber el proximo para el webservice tica
         if ($request->usa_webservice > 0) {
-
             if ($request->url_webservice == 0) {
-
                 Session::flash('message', "Selecciono Webservice debe escojer una opcion");
                 return redirect()->route('sorteos.edit', $id);
             }
-            //validacion porque la hora viene en formato hh:mm:ss
-            $explode_hora                     = explode(':', $request->hora);
-            $sorteo->url_webservice           = $request->url_webservice;
-            $sorteo->numero_sorteo_webservice = $this->buscarNumeroWebservice($request->url_webservice, $explode_hora[0].':'.$explode_hora[1]);
+            $explode_hora = explode(':', $request->hora);
+            $hora_sorteo = $explode_hora[0].':'.$explode_hora[1];
+            $sorteo->url_webservice = $request->url_webservice;
+            $numero_ganador = $this->getNumeroSorteoDesdeTxt($hora_sorteo);
+            if ($numero_ganador === null) {
+                Session::flash('error', 'No se pudo obtener el número de sorteo desde el archivo resultados.txt.');
+                $sorteo->numero_sorteo_webservice = 0;
+            } else {
+                $sorteo->numero_sorteo_webservice = $numero_ganador;
+            }
         } else {
-
-            $sorteo->url_webservice           = null;
+            $sorteo->url_webservice = null;
             $sorteo->numero_sorteo_webservice = 0;
         }
         if($request->hasFile('logo')) {
@@ -304,49 +312,27 @@ class SorteosController extends Controller
         $parametros = Parametros_sorteos::where('idsorteo', $request->idsorteo)->where('idusuario', $request->idusuario)->first();
         return response()->json([ 'success' => $parametros ]);
     }
-    public function buscarNumeroWebservice($url, $hora){
-
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => $url.'last',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        $data = json_decode($response,true);
-        //Explode a la fecha de manana
-        $explode_date_manana = explode('T', $data['manana']['fecha']);
-        if ($explode_date_manana[1] == $hora.':00') {
-            return $data['manana']['numeroSorteo'];
-        }
-
-        //Explode a la fecha de mediaTarde
-        if (!is_null($data['mediaTarde'])) {
-            $explode_date_mediaTarde = explode('T', $data['mediaTarde']['fecha']);
-            if ($explode_date_mediaTarde[1] == $hora.':00') {
-                return $data['mediaTarde']['numeroSorteo'];
+    public function getNumeroSorteoDesdeTxt($hora)
+    {
+        $file = base_path('resultados.txt');
+        if (!file_exists($file)) return null;
+        $json = file_get_contents($file);
+        $data = json_decode($json, true);
+        $hora_sorteo = substr($hora, 0, 5);
+        foreach (["manana", "mediaTarde", "tarde"] as $turno) {
+            if (!empty($data[$turno]) && isset($data[$turno]['fecha'])) {
+                $explode = explode('T', $data[$turno]['fecha']);
+                $hora_json = substr($explode[1], 0, 5);
+                if ($hora_json == $hora_sorteo && isset($data[$turno]['numeroSorteo'])) {
+                    return $data[$turno]['numeroSorteo'];
+                }
             }
-        } else {
-            return $data['manana']['numeroSorteo'] - 2;
         }
-
-        //Explode a la fecha de tarde
-        if (!is_null($data['tarde'])) {
-            $explode_date_tarde = explode('T', $data['tarde']['fecha']);
-            if ($explode_date_tarde[1] == $hora.':00') {
-                return $data['tarde']['numeroSorteo'];
+        foreach (["tarde", "mediaTarde", "manana"] as $turno) {
+            if (!empty($data[$turno]['numeroSorteo'])) {
+                return $data[$turno]['numeroSorteo'];
             }
-        } else {
-            return $data['manana']['numeroSorteo'] - 1;
         }
-
+        return null;
     }
 }

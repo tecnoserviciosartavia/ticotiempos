@@ -30,20 +30,23 @@ class VentaController extends Controller
      */
     public function create()
     {
+        $fecha_hora_actual = Carbon::now()->format('Y-m-d H:i');
         $venta_cabecera = Venta_cabecera::join('sorteos', 'venta_cabecera.idsorteo', '=', 'sorteos.id')
         ->join('config_sorteo', 'venta_cabecera.idconfigsorteo', '=', 'config_sorteo.id')
-        ->where([
-            ['venta_cabecera.fecha', '>=', date('Y-m-d')],
-            ['venta_cabecera.hora', '>=', now()->format('H:i')],
-            ['venta_cabecera.estatus', '=', 'abierto']
-        ])
-        ->orderBy(DB::raw('HOUR(venta_cabecera.hora)'))
+        ->where('venta_cabecera.estatus', 'abierto')
+        ->whereRaw("CONCAT(venta_cabecera.fecha, ' ', venta_cabecera.hora) >= ?", [$fecha_hora_actual])
+        ->orderBy(DB::raw('CONCAT(venta_cabecera.fecha, " ", venta_cabecera.hora)'))
         ->get(['venta_cabecera.*', 'sorteos.nombre', 'sorteos.logo','sorteos.es_reventado','config_sorteo.restrinccion_numero', 'config_sorteo.restrinccion_monto']);
+
+        // Restricción automática por fecha
+        $restriccion_fecha_numero = Carbon::now()->format('d'); // Ejemplo: "02"
+        $restriccion_fecha_monto = env('RESTRICCION_MONTO_DEFECTO', 1000);
+
         return view('venta/agente/index', [
-            // Use the top-menu layout
-            // Pass data to view
             'clientes' => Clientes::all(),
             'venta_cabecera' => $venta_cabecera,
+            'restriccion_fecha_numero' => $restriccion_fecha_numero,
+            'restriccion_fecha_monto' => $restriccion_fecha_monto,
         ]);
     }
 
@@ -197,6 +200,16 @@ class VentaController extends Controller
                         return redirect()->route('venta_sorteo.create');
                     }
 
+                }
+                // Restricción automática por fecha (no permitir jugar el número igual al día actual)
+                // Elimino la restricción absoluta del número del día actual
+                // Ahora solo se restringe si el monto es mayor al monto editable
+                $dia_actual = date('d');
+                $restriccion_fecha_numero = Carbon::now()->format('d');
+                $restriccion_fecha_monto = $request->restriccion_fecha_monto ?? env('RESTRICCION_MONTO_DEFECTO', 1000);
+                if (trim($request->numero) == $restriccion_fecha_numero && $request->monto > $restriccion_fecha_monto) {
+                    Session::flash('message', "No se permite jugar el número del día actual ($restriccion_fecha_numero) con un monto mayor a $restriccion_fecha_monto");
+                    return redirect()->route('venta_sorteo.create');
                 }
                 DB::commit();
                 return redirect()->route('venta_sorteo.edit', $jugada_padre)->withSuccess(__('Jugada creada correctamente.'));

@@ -16,13 +16,26 @@
             <!-- END: Modal Header -->
             <!-- BEGIN: Modal Body -->
             <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
+                <!-- Restricción automática por fecha -->
                 <div class="col-span-12 sm:col-span-6">
-                    <label for="restrinccion_numero" class="form-label">Numero</label>
+                    <label class="form-label">Número automático (día actual)</label>
+                    <input type="number" class="form-control" value="{{ isset($restriccion_fecha_numero) ? $restriccion_fecha_numero : date('d') }}" readonly>
+                    @if(isset($restriccion_fecha_monto) && isset($restriccion_fecha_numero) && $restriccion_fecha_monto > env('RESTRICCION_MONTO_DEFECTO', 1000))
+                        <span class="text-danger">Bloqueado por monto mayor al permitido ({{ env('RESTRICCION_MONTO_DEFECTO', 1000) }})</span>
+                    @endif
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                    <label class="form-label">Monto automático (editable)</label>
+                    <input type="number" class="form-control" name="restriccion_fecha_monto" value="{{ isset($restriccion_fecha_monto) ? $restriccion_fecha_monto : env('RESTRICCION_MONTO_DEFECTO', 1000) }}">
+                </div>
+                <!-- Restricción manual -->
+                <div class="col-span-12 sm:col-span-6">
+                    <label for="restrinccion_numero" class="form-label">Numero manual</label>
                     <input id="restrinccion_numero" type="number" class="form-control" placeholder="Numero del Sorteo" name="restrinccion_numero" min='0' max='99'>
                     @include('alerts.feedback', ['field' => 'restrinccion_numero'])
                 </div>
                 <div class="col-span-12 sm:col-span-6">
-                    <label for="restrinccion_monto" class="form-label">Monto</label>
+                    <label for="restrinccion_monto" class="form-label">Monto manual</label>
                     <input id="restrinccion_monto" type="number" class="form-control" placeholder="Monto de la restrinccion para el Sorteo" name="restrinccion_monto">
                     @include('alerts.feedback', ['field' => 'restrinccion_monto'])
                 </div>

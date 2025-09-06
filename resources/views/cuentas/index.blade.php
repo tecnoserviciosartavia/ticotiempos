@@ -38,15 +38,15 @@
                                 {{ $user->name }}
                             </td>
                             <td>
-                                {{ $balance->saldo_anterior }}
+                                {{ $balance ? $balance->saldo_anterior : 0 }}
                             </td>
                             <td>
-                                {{ $balance->saldo_final }}
+                                {{ $balance ? $balance->saldo_final : 0 }}
                             </td>
                             <td class="text-center">
                                 @if ($user->es_administrador == 0)
 
-                                    @if ($balance->saldo_anterior > 0)
+                                    @if ($balance && $balance->saldo_anterior > 0)
 
                                         <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#modal_new_retiro" class="btn btn-success shadow-md mr-2" id="agregar_retiro" title="Agregar Nuevo Retiro" data-id="{{ $user->id }}"><i class="w-4 h-4" data-lucide="plus"></i></a>
                                     @endif

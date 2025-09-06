@@ -37,70 +37,41 @@ class NutrirResultado implements ShouldQueue
     {
         //Juego en curso
         $juego = Venta_cabecera::find($this->juego_id);
-        //valido que este usando webservice
-        if (!is_null($juego->sorteos->url_webservice)) {
-
-            // Valido el numero del sorteo
-            if ($juego->sorteos->numero_sorteo_webservice > 0) {
-
-                $nuevo_valor = intval($juego->sorteos->numero_sorteo_webservice) + 3;
-                $conectar = $this->conectarWebservice($juego->sorteos->url_webservice.''.$nuevo_valor);
-                $data = json_decode($conectar,true);
-                switch ($juego->sorteos->hora) {
-                    case '12:55:00':
-                        $numero  = $data['manana']['numero'];
-                        $bolita  = $data['manana']['colorBolita'];
-                    break;
-                    case '16:30:00':
-                        $numero  = $data['mediaTarde']['numero'];
-                        $bolita  = $data['mediaTarde']['colorBolita'];
-                    break;
-                    case '19:30:00':
-                        $numero  = $data['tarde']['numero'];
-                        $bolita  = $data['tarde']['colorBolita'];
-                    break;
+        $rutaArchivo = base_path('resultados.txt');
+        if (file_exists($rutaArchivo)) {
+            $contenido = file_get_contents($rutaArchivo);
+            $json = json_decode($contenido, true);
+            $numero = null;
+            $bolita = null;
+            $hora = substr($juego->sorteos->hora, 0, 5); // Solo HH:MM
+            // Buscar el resultado según la hora
+            if ($json) {
+                if ($hora == '12:55' && isset($json['manana'])) {
+                    $numero = $json['manana']['numero'] ?? null;
+                    $bolita = $json['manana']['colorBolita'] ?? null;
+                } elseif ($hora == '16:30' && isset($json['mediaTarde'])) {
+                    $numero = $json['mediaTarde']['numero'] ?? null;
+                    $bolita = $json['mediaTarde']['colorBolita'] ?? null;
+                } elseif ($hora == '19:30' && isset($json['tarde'])) {
+                    $numero = $json['tarde']['numero'] ?? null;
+                    $bolita = $json['tarde']['colorBolita'] ?? null;
                 }
+            }
+            if ($numero !== null && $bolita !== null) {
                 $letra = substr($bolita, 0,1);
                 $consulta = Resultados_parametros::where('descripcion', '=', $letra)->first();
                 //Actualizo la informacion
                 Venta_cabecera::where('id', $this->juego_id)
                 ->update([
                     'numero_ganador' => $numero,
-                    'adicional_ganador' => $consulta->id,
-                    ]);
-                CalculateWinners::dispatch($this->juego_id)->delay(now()->addMinutes(1));
-                Sorteos::where('id', $juego->sorteos->id)
-                ->update([
-                    'numero_sorteo_webservice' => $nuevo_valor
+                    'adicional_ganador' => $consulta ? $consulta->id : null,
                 ]);
+                CalculateWinners::dispatch($this->juego_id)->delay(now()->addMinutes(1));
             } else {
-
-                Log::error('El numero de Sorteo debe ser mayor a 0');
+                Log::error('No se encontró resultado para la hora (HH:MM): ' . $hora);
             }
         } else {
-
-            Log::error('No posee URL el sorteo para Webservices o se encuentra en NULL');
+            Log::error('No se encontró el archivo resultados.txt');
         }
-    }
-
-    public function conectarWebservice($url)
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => $url,
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        return $response;
     }
 }

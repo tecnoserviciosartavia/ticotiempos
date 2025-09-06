@@ -16,6 +16,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\StartMatches::class,
         Commands\CloseMatches::class,
+        Commands\NutrirNumerosGanadores::class, // Registro del comando personalizado
+        Commands\ActualizarResultadosJson::class, // Nuevo comando para actualizar el JSON
     ];
     /**
      * Define the application's command schedule.
@@ -25,9 +27,19 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        //$schedule->command('start:gamens')->dailyAt(env('APP_FIRST_TIME'));
-        //$schedule->command('close:gamens')->everyTenMinutes()->runInBackground();
+    $schedule->command('start:gamens')->everyFiveMinutes();
+    $schedule->command('close:gamens')->everyTenMinutes();
+    $schedule->command('optimize:clear')->hourly();
+    $schedule->command('start:balance')->dailyAt('06:00');
+    // Ejecuta el comando 10 minutos después del sorteo para asegurar que el resultado esté disponible
+    // Ejecuta el comando tres veces al día después de los sorteos
+    $schedule->command('nutrir:numeros-ganadores')->dailyAt('13:10');
+    $schedule->command('nutrir:numeros-ganadores')->dailyAt('16:40');
+    $schedule->command('nutrir:numeros-ganadores')->dailyAt('19:40');
+    // Ejecuta el script Node.js solo en los horarios requeridos
+    $schedule->command('resultados:actualizar-json')->dailyAt('13:00');
+    $schedule->command('resultados:actualizar-json')->dailyAt('16:40');
+    $schedule->command('resultados:actualizar-json')->dailyAt('19:40');
     }
 
     /**
